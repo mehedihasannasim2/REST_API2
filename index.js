@@ -2,7 +2,21 @@ const Joi = require('joi');
 const express = require('express');
 const app = express();
 
+const logger = require('./logger');
+
 app.use(express.json());
+
+// Custom middleware function
+
+
+app.use(logger);
+
+app.use(function(req, res, next) {
+    console.log('Authenticating...');
+    next();
+})
+
+
 
 const courses = [
     { id: 1, name: 'course1'},
