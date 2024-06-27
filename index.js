@@ -1,3 +1,6 @@
+const startupDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db');
+
 const config = require('config');
 
 const helmet = require('helmet');
@@ -30,9 +33,11 @@ app.use(helmet());
 
 if (app.get('env') === 'development'){
     app.use(morgan('tiny')); 
-    console.log("Morgan enabled...");  
+    startupDebugger("Morgan enabled...");  
 }
-
+startupDebugger('dubug kaj kortece')
+// db work
+dbDebugger('connected to the database..');
 
 // Custom middleware function
 app.use(logger);
