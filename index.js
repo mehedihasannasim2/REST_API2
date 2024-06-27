@@ -1,3 +1,6 @@
+const helmet = require('helmet');
+const morgan = require('morgan');
+
 const Joi = require('joi');
 const express = require('express');
 const app = express();
@@ -9,6 +12,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // key=value&key=value
 app.use(express.static('public')); // key=value&key=value
 
+// Third party middleware
+app.use(helmet()); 
+app.use(morgan('tiny')); 
 
 
 // Custom middleware function
