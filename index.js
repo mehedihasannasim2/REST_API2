@@ -11,6 +11,12 @@ const express = require('express');
 const app = express();
 const logger = require('./logger');
 
+// Templating engine
+app.set('view engine', 'pug');
+app.set('views', './views');  // default
+
+
+
 // console.log(`Node_ENV: ${process.env.NODE_ENV}`);
 // console.log(`app: ${app.get('env')}`);
 // app.get('env')
@@ -32,7 +38,7 @@ app.use(express.static('public')); // key=value&key=value
 app.use(helmet()); 
 
 if (app.get('env') === 'development'){
-    app.use(morgan('tiny')); 
+    app.use(morgan('tiny'));    
     startupDebugger("Morgan enabled...");  
 }
 startupDebugger('dubug kaj kortece')
@@ -56,13 +62,13 @@ const courses = [
 ]
 
 app.get('/', (req, res) => {
-    res.send('Helloooo');
+    res.render('index', {title: 'My Express App', message: 'hello nasim' });
 });
 
 
-app.get('/api/courses/', (req, res) => {
-    res.send(courses);
-});
+// app.get('/api/courses/', (req, res) => {
+//     res.send(courses);
+// });
 
 
 app.post('/api/courses/', (req, res) => {
